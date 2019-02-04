@@ -1,0 +1,188 @@
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* #wrapper.toggled {
+    padding-left: 250px;
+} */
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    right: 0px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #fff;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 0;
+}
+
+#sidebar-wrapper {
+    width: 100%;
+}
+
+#page-content-wrapper {
+    width: 100%;
+}
+.notificationusername{
+    text-align: left !important;
+}
+
+.member-list {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+    padding-top: 10px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav>.sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav>.sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav>.sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+@media(min-width:650px) {
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+    #sidebar-wrapper {
+        width: 300px;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+
+.notifications {
+    color: #ea357f;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.notifications-dropdown {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 5px !important;
+}
+
+.notificationsimg {
+    height: 40px !important;
+    width: 40px !important;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.notiname {
+    margin-left: -15px !important;
+}
+
+.unread {
+    background: #d2c8c8 !important;
+    border-radius: 5px;
+    /* animation: animate 1s linear infinite; */
+    /* animation-direction: alternate; */
+}
+
+@keyframes animate {
+    0% {
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 0.6;
+    }
+    100% {
+        opacity: 0.3;
+    }
+}
+.inline{
+    float: right;
+}
+.inline li .nav-icon{
+    font-size: 20px;
+    color: #ea357f;
+    padding: 8px;
+}
+
+.inline li{
+    display: inline;
+    text-align: center;
+}
+.badge-count{
+    position: absolute;
+    /* margin-left: 10px; */
+    margin-top: -40px;
+
+}
+.message-description{
+    font-size: 12px !important;
+}
+.message-description a{
+    color: #666666 !important;
+}

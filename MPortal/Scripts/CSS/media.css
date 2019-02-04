@@ -1,0 +1,295 @@
+
+.scrollable::-webkit-scrollbar {
+    height: 5px;
+}
+.scrollable::-webkit-scrollbar-track {
+    background-color: #ccc;
+}
+.scrollable::-webkit-scrollbar-thumb {
+    background-color: #777777;
+}
+
+.scrolflow {
+    margin-top: 15px !important;
+}
+.padtopbot {
+    padding-top: 50px !important;
+}
+.extraa {
+    margin: 0px auto;
+}
+.product-cat {
+  display: inline-block;
+  width: 100%;
+  margin-right: 10px;
+  position: relative;
+}
+
+.product-cat h4 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #505050;
+}
+
+.product-cat a {
+  text-transform: uppercase;
+  font-size: 12px;
+  outline: none !important;
+  color: #3B1431;
+  text-decoration: none;
+}
+
+.product-overlay p{
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+span.roll {
+    background: center center no-repeat #fff;
+    height: 150px;
+    position: absolute;
+    text-align: center;
+    left: 0px;
+    line-height: 153px;
+    text-align: center;
+    width: 155px;
+    z-index: 10;
+}
+ 
+/* add the font awesome icon */
+ 
+.roll:before {
+    content: "\f00d"; 
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+    color: #784669;
+    font-size: 40px;
+    padding-right: 0.5em;
+    position: absolute;
+    top: 0;
+    left: 65px;
+}
+
+.newwen {
+    min-height: 600px;
+}
+
+.center{
+   text-align: center !important;
+}
+.nomodalheader{
+   margin-top:0px  !important;
+}
+.lesspad {
+    padding-top: 111px !important;
+}
+
+.codenew {
+    min-height: 500px;
+}
+
+@media only screen and (max-width:1200px) and (min-width:768px){
+    #pswd_info {
+    bottom: -200px  !important;
+}
+}
+
+    @media only screen and (max-width:414px) and (min-width:320px) {
+        #pswd_info {
+            bottom: 120px !important;
+        }
+    }
+
+@media only screen and (max-width:768px) and (min-width:320px){
+    ul.menu-horizontal.text-center li {
+    display: inline;
+    padding-right: 5px;
+    }
+    p.month {
+    margin-bottom: 5px;
+    }
+    input#message-data {
+    width: 80% !important;
+    }
+    .mt10 {
+    margin-bottom: 20px;
+    }
+    .latestupdateimg {
+    text-align: center;
+    }
+    .dashboardusername {
+    text-align: center;
+    }
+    .msgpagedate {
+    padding-right: 30px;
+    }
+    .dmytxts {
+    padding: 30px !important;
+    }
+    .bnmedia {
+    padding: 5px 25px !important;
+    }
+    .padmar {
+    margin-left: 85px;
+    }
+    .container.pos-vertical-center.pt30 {
+    width: auto;
+    }
+    
+    input[type], textarea, select {
+    font-size: 11px;
+    }
+    a.btn.btn--primary.prl20 {
+    margin-bottom: 5px;
+    }
+    .scrollable {
+    overflow-x: auto;
+    }
+    i.fa.fa-times-circle.closeicon {
+    float: left;
+    padding-top: 3px;
+    padding-right: 15px;
+    }
+    .col-sm-6.fulwidth {
+    width: 50%;
+    float: left;
+    }
+    .form-email {
+    padding: 20px;
+    }
+    .fltflt {
+    float: left !important;
+    }
+    .col-sm-6 .halfwidth{
+    float: right;
+    width: 50%;
+    }
+    p.ortextalign {
+    text-align: center;
+    }
+    p.registerheading {
+    font-size: 19px;
+    padding-left: 20px;
+    }
+    p.registertitle {
+    margin-bottom: 10px;
+    }
+    table.border--round.table--alternate-column.table-responsive.fixheight {
+    margin-bottom: 0px;
+    }
+    p.registertitle {
+    margin-bottom: 10px;
+    }
+    input.validate-required {
+    margin-top: 5px;
+    }
+    span.select2-selection.select2-selection--single {
+    margin-top: 10px;
+    }
+    .paddlr3 {
+    padding-left: 20px !important;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 45px !important;
+    }
+    .displayinline {
+    line-height: 25px !important;
+    }
+    span.select2-selection.select2-selection--multiple {
+    height: 100% !important;
+    }
+    .btn-file input[type=file] {
+    width: 100% !important;
+    }
+    .removeit {
+    display: none;
+    }
+    .mstatusawatingdivrced {
+    display: none;
+    }
+    .disdis {
+    display: none !important;
+    }
+    .lstne {
+    margin-left: 5px;
+    }
+    .fstnme {
+    padding-right: 10px;
+    padding-left: 10px;
+    }
+    .noo {
+    padding-right: 10px !important;
+    }
+    .numbr {
+    padding-left: 10px !important;
+    }
+    .dobdob {
+    padding-right: 15px;
+    }
+    .blwdob {
+    padding-left: 15px;
+    padding-bottom: 10px;
+    }
+    .pswrd {
+    padding-right: 15px;
+    padding-bottom: 10px;
+    }
+    .wrdd {
+    padding-left: 15px;
+    }
+    p.mt6 {
+    text-align: center;
+    }
+    .marn {
+    margin: 0 auto;
+    }
+    .marn {
+    padding-left: 0px !important;
+    padding-right: 10px;
+    }
+    a.btn.btn--primary.prl20 {
+    margin-bottom: 5px;
+    }
+    .msgbox img {
+    margin: 0 auto;
+    }
+    .pricing.pricing-1.boxed.boxed--lg.boxed--border {
+    padding-left: 5px;
+    padding-right: 0px;
+    }
+    .packagessection .pricing.pricing-1.boxed.boxed--lg.boxed--border{
+        text-align: center;
+    }
+    li.mr0 {
+    display: table-cell;
+    position: relative;
+    top: -15px;
+    left: -60px;
+    text-align: center;
+    }
+    .process-1:before {
+    display: none;
+    }
+    .chatcontainer .left {
+    width: 100% !important;
+    }
+    .chatcontainer .right {
+    width: 100% !important;
+    margin-bottom: 40px;
+    }
+    .chatcontainer .right .write input {
+    width: 100px;
+    }
+    .chat.active-chat {
+    margin-top: -50px !important;
+    }
+}
+
+@media only screen and (max-width:360px){
+    .paddlr3 {
+    padding-left: 5px !important;
+    }
+}

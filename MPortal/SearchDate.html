@@ -1,0 +1,693 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Matrimony | Search By Date</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Site Description Here">
+    <link rel="icon" href="img/assets/logo.png">
+
+
+		    <script src="Scripts/JS/jquery-3.2.1.min.js"></script>
+	  <script src="Scripts/JS/bootstrap.min.js"></script>
+
+
+
+	   <!--  <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/flickity.min.js"></script>
+    <script src="js/easypiechart.min.js"></script>
+    <script src="js/parallax.js"></script>
+    <script src="js/typed.min.js"></script>
+    <script src="js/datepicker.js"></script>
+    <script src="js/isotope.min.js"></script>
+    <script src="js/ytplayer.min.js"></script>
+    <script src="js/lightbox.min.js"></script>
+    <script src="js/granim.min.js"></script>
+    <script src="js/jquery.steps.min.js"></script>
+    <script src="js/countdown.min.js"></script>
+    <script src="js/twitterfetcher.min.js"></script>
+    <script src="js/spectragram.min.js"></script>
+    <script src="js/smooth-scroll.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    -->
+
+
+   <!--   <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/stack-interface.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/socicon.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/lightbox.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/flickity.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/iconsmind.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/jquery.steps.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/theme.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/custom.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/media.css" rel="stylesheet" />
+    <link href="css/mycss.css" rel="stylesheet" />
+    <link rel="stylesheet" href="mdpcss/bootstrap-material-datetimepicker.css" />
+    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">-->
+
+	
+	<link href="Scripts/CSS/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="Scripts/CSS/stack-interface.css" rel="stylesheet" type="text/css" media="all">
+    <link href="Scripts/CSS/socicon.css" rel="stylesheet" type="text/css" media="all">
+    <link href="Scripts/CSS/lightbox.min.css" rel="stylesheet" type="text/css" media="all">
+    <link href="Scripts/CSS/flickity.css" rel="stylesheet" type="text/css" media="all">
+    <link href="Scripts/CSS/iconsmind.css" rel="stylesheet" type="text/css" media="all">
+    <link href="Scripts/CSS/jquery.steps.css" rel="stylesheet" type="text/css" media="all">
+    <link href="Scripts/CSS/theme.css" rel="stylesheet" type="text/css" media="all">
+    <link href="Scripts/CSS/custom.css" rel="stylesheet" type="text/css" media="all">
+	<link href="Scripts/CSS/select2.min.css" rel="stylesheet" />
+    <link href="Scripts/CSS/media.css" rel="stylesheet" />
+    <link href="Scripts/CSS/mycss.css" rel="stylesheet" />
+    <link rel="stylesheet" href="Scripts/CSS/style3.css">
+    <link rel="stylesheet" href="Scripts/CSS/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,400i,500,600,700%7CMerriweather:300,300i%7CMaterial+Icons"
+        rel="stylesheet">
+    <!--<link rel="stylesheet" href="css/style3.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+ 
+    <style type="text/css">
+        .months {
+            background: silver !important;
+            color: black !important;
+        }
+
+        .months_active {
+            background: #ea357f !important;
+            color: white !important;
+        }
+    </style>
+</head>
+
+<body id="messagespage" class="search-da">
+    <!--PRELOADER STARTS HERE-->
+    <div id="loaderspinner">
+        <div id="spinner">
+            <span class="loader">
+                <i class="fa fa-heart"></i>
+                <i class="fa fa-heart"></i>
+            </span>
+        </div>
+    </div>
+    <!--PRELOADER ENDS HERE-->
+    <div id="wrapper" class="toggled">
+        <div id="sidebar-wrapper">
+            <section class="cta cta-4 space--xxs tabssection ptb10">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-10 text-center whitecolor">
+                            Who is Online
+
+                        </div>
+                        <div class="col-sm-2 text-center whitecolor" id="menu-close">
+                            <p class="dashboardusername whitecolor pointer">X</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div id="online-member">
+                <div class="col-md-12 col-sm-12 col-xs-12 pr0">
+                    <img src="img/assets/nodata.svg">
+                </div>
+            </div>
+        </div>
+        <div id="page-content-wrapper">
+            <a id="start"></a>
+            <div class="fixedsection">
+                <div class="nav-container">
+                    <div class="bar bar--sm visible-xs">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-2">
+                                    <a href="dashboard.html">
+                                        <img class="logo logo-dark mobilelogo" alt="logo" src="img/assets/newlogo1.png" />
+                                        <img class="logo logo-light logoimg mobilelogo" alt="logo" src="img/assets/newlogo1.png" />
+                                    </a>
+                                </div>
+                                <div class="col-xs-8">
+                                    <div class="">
+                                        <ul class="inline">
+                                            <li>
+                                                <a href="#request">
+                                                    <i class="nav-icon fa fa-users" aria-hidden="true">
+                                                        <!-- <span class="badge badge-count">5</span> -->
+                                                    </i>
+                                                </a>
+                                            </li>
+                                            <li>
+
+                                                <!-- <i class="nav-icon fa fa-bell"></i> -->
+                                                <a href="#messages" class="dropdown-toggle" data-toggle="dropdown">
+                                                    <i class="nav-icon fa fa-bell">
+                                                        <span id="mobile_noti_count" class="badge badge-count">0</span>
+                                                    </i>
+                                                </a>
+                                                <div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px; left: -75px;">
+                                                    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;">
+                                                        <div id="notification-list" id="main-navbar-messages" style="overflow: auto; width: auto; height: 350px;">
+
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="menu-open nav-icon fa fa-globe">
+                                                        <span id="online_count" class="badge badge-count">0</span>
+                                                    </i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="hamburger-toggle" data-toggle-class="#menu1;hidden-xs">
+                                                    <i class="icon icon--sm stack-interface stack-menu"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                      <nav id="menu1" class="bar bar--sm bar-1 hidden-xs bgwhite">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                                    <div class="bar__module">
+                                        <a href="dashboard.html">
+                                            <img style="display:none" class="logo logo-dark" alt="logo" src="Img/newlogo1.png" />
+                                            <img style="display:none"  class="logo logo-light logoimg1" alt="logo" src="Img/newlogo1.png" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-10 text-right text-left-xs text-left-sm">
+                                    <div class="bar__module mt-4">
+                                        <ul class="menu-horizontal text-left">
+                                            <li onclick="location.href='dashboard.html';">
+                                                <a href="dashboard.html" class="">Dashboard</a>
+                                            </li>
+                                            <li style="display:none" onclick="location.href='matches.html';">
+                                                <a href="matches.html" class="">Matches</a>
+                                            </li>
+                                            <li style="display:none" onclick="location.href='preferences.html';">
+                                                <a href="preferences.html" class="">Preferences</a>
+                                            </li>
+                                            <li style="display:none" onclick="location.href='matrimony.html';">
+                                                <a href="matrimony.html" class="">Matrimony</a>
+                                            </li>
+                                            <li class="activepink" onclick="location.href='SearchBasic.html';">
+                                                <a href="SearchBasic.html" class="">Searches</a>
+                                            </li>
+											
+                                            <li style="display:none" onclick="location.href='requests.html';">
+                                                <a href="requests.html" class="" onclick="requestpagetab1select();">Requests</a>
+                                            </li>
+                                            <li style="display:none" onclick="location.href='chat.html';">
+                                                <a href="chat.html" class="">Chat</a>
+                                            </li>
+                                            <li style="display:none" class="hidden-xs">
+                                                <a href="#" class="menu-open" class="">Online Member</a>
+                                            </li>
+                                            <li>
+                                                <div class="dropdown profileddm">
+                                                    <span class="dropdown__trigger">
+                                                        <a class="dropdownanchor">My Account</a>
+                                                    </span>
+                                                    <div class="dropdown__container">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-sm-3 col-md-2 dropdown__content p13">
+                                                                    <ul class="menu-vertical alignleft">
+                                                                        <li onclick="location.href='myprofile.html';">
+                                                                            <a href="myprofile.html" class="textdeconone">
+                                                                                <i class="fa fa-user pinkcolor"
+                                                                                    aria-hidden="true"></i>&nbsp;My
+                                                                                Profile</a>
+                                                                        </li>
+                                                                        <li class="pointsli">
+                                                                            <div class="row">
+                                                                                <div class="col-md-6 col-sm-6 col-xs-8">
+                                                                                    <a href="#" class="textdeconone">
+                                                                                        <i class="fa fa-star pinkcolor"
+                                                                                            aria-hidden="true"></i>&nbsp;Points</a>
+                                                                                </div>
+                                                                                <div class="col-md-2 col-sm-3 col-xs-2 none-top-margin">
+                                                                                    <span class="badge tooltip1 unusedpoints">0
+                                                                                        <span class="tooltiptext1">Unused</span>
+                                                                                    </span>
+                                                                                </div>
+                                                                                <div class="col-md-2 col-sm-3 col-xs-2 none-top-margin">
+                                                                                    <span class="badge tooltip1 usedpoints">0
+                                                                                        <span class="tooltiptext1">Used</span>
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li onclick="location.href='upgrade.html';">
+                                                                            <a href="upgrade.html" class="textdeconone">
+                                                                                <i class="fa fa-shopping-cart pinkcolor"
+                                                                                    aria-hidden="true"></i>&nbsp;Purchase
+                                                                                Plan</a>
+                                                                        </li>
+                                                                        <li onclick="location.href='privacy.html';">
+                                                                            <a href="privacy.html" class="textdeconone">
+                                                                                <i class="fa fa-lock pinkcolor"
+                                                                                    aria-hidden="true"></i>&nbsp;Privacy</a>
+                                                                        </li>
+                                                                        <li onclick="location.href='edit-password.html';">
+                                                                            <a href="edit-password.html" class="textdeconone">
+                                                                                <i class="fa fa-pencil pinkcolor"
+                                                                                    aria-hidden="true"></i>&nbsp;Edit
+                                                                                Password</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a onclick="logout()" class="textdeconone pointer">
+                                                                                <i class="fa fa-power-off pinkcolor"
+                                                                                    aria-hidden="true"></i>&nbsp;Logout</a>
+                                                                        </li>
+
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+											 <li class="" onclick="location.href='index.html';">
+                                                <a href="index.html" class="">Logout</a>
+                                            </li>
+                                            <li class="hidden-xs">
+                                                <div id='notications' class="dropdown profileddm">
+                                                    <span class="dropdown__trigger">
+                                                        <i class="fa fa-bell notifications" aria-hidden="true">
+                                                            <span id="nots-type-1" class="badge notification-count"
+                                                                style="margin-top:  -20px;">0</span>
+                                                        </i>
+                                                    </span>
+                                                    <div class="dropdown__container">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-sm-4 col-md-3 dropdown__content notifications-dropdown">
+                                                                    <ul id="notications_content" class="menu-vertical alignleft">
+
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <div class="main-container">
+                    <section class="cta cta-4 space--xxs tabssection ptb10">
+                        <div class="container-fluid">
+                             <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <ul class="menu-horizontal text-center">
+                                        <li >
+                                            <a href="SearchBasic.html" class="whitecolor font12">Basic search</a>
+                                        </li>
+                                        <li >
+                                            <a href="SearchRegular.html" class="whitecolor font12">Regular search</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="whitecolor font12">Advanced search</a>
+                                        </li>
+
+                                        <li >
+                                            <a href="SearchKeyword.html" class="whitecolor font12">Keyword Search</a>
+                                        </li>
+                                        <!-- <li>
+                                            <a href="recently-viewed-profiles.html" class="whitecolor font12">Recently viewed Profiles</a>
+                                        </li> -->
+                                        <li >
+                                            <a href="SearchId.html" class="whitecolor font12">Search By Id</a>
+                                        </li>
+                                        <li class="activesubmenu">
+                                            <a href="SearchDate.html" class="whitecolor font12">Search By Date</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <section class="pt104">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12 plr0">
+                            <!--SUGGESTIONS SECTION STARTS HERE-->
+                            <div class="regularsearchform">
+                                <div class="row">
+                                    <div class="col-lg-1 col-md-2 col-sm-1"></div>
+                                    <div class="col-lg-10 col-md-8 col-sm-10">
+                                        <br>
+                                        <h3 class="mb0 centeralign">Date Search</h3>
+                                        <h2 class="horizontalline">
+                                            <span class="horizontaltext">
+                                                <i class="fa fa-heart pinkcolor" aria-hidden="true"></i>
+                                            </span>
+                                        </h2>
+                                        <br>
+                                        <br>
+                                        <div class="row pb20">
+                                            <div class="col-md-2 col-sm-2 col-xs-2"></div>
+                                            <div class="col-md-3 col-sm-3 col-xs-3">
+                                                <p class="registertitle">Date</p>
+                                            </div>
+                                            <div class="col-md-7 col-sm-7 col-xs-7">
+                                                <div class="row">
+                                                    <div class="col-md-4 col-sm-3 col-xs-3">
+                                                        <input type="text" id="searchDateFrom" name="name" placeholder="From Date"
+                                                            class="validate-required">
+                                                    </div>
+                                                    <div class="col-md-1 col-sm-1 col-xs-1">
+                                                        <p class="registertitle pt5">to</p>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-3 col-xs-3">
+                                                        <input type="text" id="searchDateTo" name="name" placeholder="To Date"
+                                                            class="validate-required">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row pb20">
+                                            <div class="col-md-2 col-sm-2 col-xs-2"></div>
+                                            <div class="col-md-3 col-sm-3 col-xs-3">
+                                                <p class="registertitle">Age</p>
+                                            </div>
+                                            <div class="col-md-7 col-sm-7 col-xs-7">
+                                                    <div class="row">
+                                                            <div class="col-md-3 col-sm-3 col-xs-5">
+                                                                <select class="js-example-basic-single" id="sr_startage">
+                                                                    <option value="18">18</option>
+                                                                    <option value="19">19</option>
+                                                                    <option value="20">20</option>
+                                                                    <option value="21">21</option>
+                                                                    <option value="22">22</option>
+                                                                    <option value="23">23</option>
+                                                                    <option value="24">24</option>
+                                                                    <option value="25">25</option>
+                                                                    <option value="26">26</option>
+                                                                    <option value="27">27</option>
+                                                                    <option value="28">28</option>
+                                                                    <option value="29">29</option>
+                                                                    <option value="30">30</option>
+                                                                    <option value="31">31</option>
+                                                                    <option value="32">32</option>
+                                                                    <option value="33">33</option>
+                                                                    <option value="34">34</option>
+                                                                    <option value="35">35</option>
+                                                                    <option value="36">36</option>
+                                                                    <option value="37">37</option>
+                                                                    <option value="38">38</option>
+                                                                    <option value="39">39</option>
+                                                                    <option value="40">40</option>
+                                                                    <option value="41">41</option>
+                                                                    <option value="42">42</option>
+                                                                    <option value="43">43</option>
+                                                                    <option value="44">44</option>
+                                                                    <option value="45">45</option>
+                                                                    <option value="46">46</option>
+                                                                    <option value="47">47</option>
+                                                                    <option value="48">48</option>
+                                                                    <option value="49">49</option>
+                                                                    <option value="50">50</option>
+                                                                    <option value="51">51</option>
+                                                                    <option value="52">52</option>
+                                                                    <option value="53">53</option>
+                                                                    <option value="54">54</option>
+                                                                    <option value="55">55</option>
+                                                                    <option value="56">56</option>
+                                                                    <option value="57">57</option>
+                                                                    <option value="58">58</option>
+                                                                    <option value="59">59</option>
+                                                                    <option value="60">60</option>
+                                                                    <option value="61">61</option>
+                                                                    <option value="62">62</option>
+                                                                    <option value="63">63</option>
+                                                                    <option value="64">64</option>
+                                                                    <option value="65">65</option>
+                                                                    <option value="66">66</option>
+                                                                    <option value="67">67</option>
+                                                                    <option value="68" style="display: none;">68</option>
+                                                                    <option value="69" style="display: none;">69</option>
+                                                                    <option value="70" style="display: none;">70</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-1 col-sm-1 col-xs-1">
+                                                                <p class="registertitle pt5">to</p>
+                                                            </div>
+                                                            <div class="col-md-3 col-sm-3 col-xs-5">
+                                                                <select class="js-example-basic-single" id="sr_endage">
+                                                                    <option value="21">21</option>
+                                                                    <option value="22">22</option>
+                                                                    <option value="23">23</option>
+                                                                    <option value="24">24</option>
+                                                                    <option value="25">25</option>
+                                                                    <option value="26">26</option>
+                                                                    <option value="27">27</option>
+                                                                    <option value="28">28</option>
+                                                                    <option value="29">29</option>
+                                                                    <option value="30">30</option>
+                                                                    <option value="31">31</option>
+                                                                    <option value="32">32</option>
+                                                                    <option value="33">33</option>
+                                                                    <option value="34">34</option>
+                                                                    <option value="35">35</option>
+                                                                    <option value="36">36</option>
+                                                                    <option value="37">37</option>
+                                                                    <option value="38">38</option>
+                                                                    <option value="39">39</option>
+                                                                    <option value="40" selected>40</option>
+                                                                    <option value="41">41</option>
+                                                                    <option value="42">42</option>
+                                                                    <option value="43">43</option>
+                                                                    <option value="44">44</option>
+                                                                    <option value="45">45</option>
+                                                                    <option value="46">46</option>
+                                                                    <option value="47">47</option>
+                                                                    <option value="48">48</option>
+                                                                    <option value="49">49</option>
+                                                                    <option value="50">50</option>
+                                                                    <option value="51">51</option>
+                                                                    <option value="52">52</option>
+                                                                    <option value="53">53</option>
+                                                                    <option value="54">54</option>
+                                                                    <option value="55">55</option>
+                                                                    <option value="56">56</option>
+                                                                    <option value="57">57</option>
+                                                                    <option value="58">58</option>
+                                                                    <option value="59">59</option>
+                                                                    <option value="60">60</option>
+                                                                    <option value="61">61</option>
+                                                                    <option value="62">62</option>
+                                                                    <option value="63">63</option>
+                                                                    <option value="64">64</option>
+                                                                    <option value="65">65</option>
+                                                                    <option value="66">66</option>
+                                                                    <option value="67">67</option>
+                                                                    <option value="68">68</option>
+                                                                    <option value="69">69</option>
+                                                                    <option value="70">70</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row pb20">
+                                            <div class="col-md-2 col-sm-2 col-xs-2"></div>
+                                            <div class="col-md-3 col-sm-3 col-xs-3">
+                                                <p class="registertitle">Religion</p>
+                                            </div>
+                                            <div class="col-md-5 col-sm-5 col-xs-5">
+                                                <select class="js-example-basic-single" id="sr_religion">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row pb20">
+                                            <div class="col-md-2 col-sm-2 col-xs-2"></div>
+                                            <div class="col-md-3">
+                                                <p class="registertitle">Select Caste</p>
+                                            </div>
+                                            <div class="col-md-5 col-sm-5 col-xs-5">
+                                                <select class="js-example-basic-single" id="sr_caste">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <hr class="registerhr">
+                                    </div>
+                                    <div class="col-lg-1 col-md-2 col-sm-1"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4"></div>
+                                    <div class="col-lg-4 pt10">
+                                        <a>
+                                            <button type="submit" class="btn btn--primary type--uppercase floatright updateBtn"
+                                                onclick="searchregular()">Search&nbsp;
+                                                <i class="fa fa-spinner fa-spin fa-3x fa-fw loadericon" style="color: #fff;font-size: 20px;"></i>
+                                            </button>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4"></div>
+                                </div>
+                                <br>
+                                <br>
+                            </div>
+                            <!--SUGGESTIONS SECTION ENDS HERE-->
+                        </div>
+                        <!-- Request section starts here -->
+                        <div id="request" class="col-lg-2 col-md-2 col-sm-3 col-xs-12 nopadding">
+                            <div style="display:none" class="tabs-container" data-content-align="left">
+                                <div class="row tabrow">
+                                    <div class="col-md-12 requestbg">
+                                        <p class="requeststext">Interests</p>
+                                    </div>
+                                    <!-- <hr class="requestborder"> -->
+                                    <div class="col-md-4 col-sm-4 col-xs-4 borderlinergt">
+                                        <p class="tablist pointer activeunderline tabheading">
+                                            <a onclick="clicknew(this);" class="textdeconone tabgrey newclick">Received</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-4 borderlinergt">
+                                        <p class="tablist pointer tabheading">
+                                            <a onclick="clicksent(this);" class="textdeconone tabgrey">Sent</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-4">
+                                        <p class="tablist pointer tabheading">
+                                            <a onclick="showChat(this)" class="textdeconone tabgrey">Chat</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!--USERS LIST FOR NEW REQUESTS STARTS HERE-->
+                                <div class="shownewrequests userslist padding8 scrollusersdashboard dyn_load">
+
+                                </div>
+                                <!--USERS LIST FOR SENT REQUESTS STARTS HERE-->
+                                <div class="showsentrequests userslist padding8">
+
+                                </div>
+                                <!--USERS LIST FOR SENT REQUESTS ENDS HERE-->
+
+                                <div class="listchatusers userslist padding8">
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Request section ends here   -->
+                    </div>
+                </div>
+            </section>
+            </section>
+            <footer class="text-center space--sm footer-5  bg--dark ptb35">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="heading-block mb30">
+                                <ul class="list-inline list--hover">
+                                    <li>
+                                        <a href="about.html">
+                                            <span>About Us</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="terms.html">
+                                            <span>Terms and Conditions</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="contact.html">
+                                            <span>Contact Us</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="social-list list-inline list--hover">
+                                    <li>
+                                        <a href="#">
+                                            <i class="socicon socicon-google icon icon--xs"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="socicon socicon-twitter icon icon--xs"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="socicon socicon-facebook icon icon--xs"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="socicon socicon-instagram icon icon--xs"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <span class="type--fine-print">©
+                                    <span class="update-year">2017</span> Beautiful Matrimony.</span>
+                                <a class="type--fine-print" href="privacy-policy.html">Privacy Policy</a>
+                                <a class="type--fine-print" href="legal-policy.html">Legal</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </footer>
+        </div>
+        <!--<div class="loader"></div>-->
+        <a class="back-to-top inner-link" href="#start" data-scroll-class="100vh:active">
+            <i class="stack-interface stack-up-open-big"></i>
+        </a>
+    </div>
+    	<script type="text/javascript" src="Scripts/JS/moment.js"></script>
+    <script type="text/javascript" src="Scripts/JS/bootstrap-material-datetimepicker.js"></script>
+    <!--SCRIPT FOR LOADER STARTS HERE-->
+    <!--DATEPICKER JS-->
+    <script type="text/javascript">
+        $(function () {
+            $('#loaderspinner').fadeOut('slow', function () {
+                $(this).hide();
+            });
+
+        });
+    </script>
+    <!--SCRIPT FOR LOADER ENDS HERE-->
+    <!-- site script starts here -->
+    <script src="Scripts/JS/url.js"></script>
+    <script src="Scripts/JS/request.js"></script>
+    <script src="Scripts/JS/authch1eck.js"></script>
+    <script src="Scripts/JS/commonforall.js"></script>
+    <script src="Scripts/JS/logout.js"></script>
+    <script src="Scripts/JS/search_date.js"></script>
+    <script src="Scripts/JS/whoisonline.js?v=0.0.0.1"></script>
+    <script src="Scripts/JS/notification.js"></script>
+    <!-- site scripts ends here-->
+</body>
+
+</html>

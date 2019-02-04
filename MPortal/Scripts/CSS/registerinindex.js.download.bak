@@ -1,0 +1,591 @@
+$(function () {
+
+    localStorage.issociallogin = 0;
+
+    $('#signup-profile-for').select2();
+    $('#signup-religion').select2();
+    $('#mother-m_tongue').select2();
+
+    $('.dob').select2();
+
+    $('.loadericon,.registerauthcntnt').hide();
+    getDropdowns();
+
+});
+
+$("#signup-profile-for").change(function () {
+    if ($("#signup-profile-for").val() == "2" || $("#signup-profile-for").val() == "4") {
+        $(".malelable").click();
+    } else if ($("#signup-profile-for").val() == "3" || $("#signup-profile-for").val() == "5") {
+        $(".femalelable").click();
+    } else {
+        $('[name="gender-radio"]').prop('checked', false);
+    }
+
+})
+
+//get dd for mothertongue , profile for , religion , country code
+function getDropdowns() {
+
+    $.ajax({
+        url: indexpage_dd_api,
+        type: 'get',
+        success: function (data) {
+
+            var profilefordd = '<option selected="" value="null">Profile For *</option>';
+            var religiondd = '<option selected="" value="null">Religion *</option>';
+
+            for (var prof of data.relationship) {
+                profilefordd += `<option value="${prof.id}">${prof.name}</option>`;
+            }
+            for (var rel of data.religion) {
+                religiondd += `<option value="${rel.id}">${rel.name}</option>`;
+            }
+            $('#mother-m_tongue').empty().append('<option selected="" value="null">Mother Tongue *</option>');
+
+            for (var i = 0; i < data.mother_tongue.length; i++) {
+                if (data.mother_tongue[i].name == "Tamil") {
+                    $('#mother-m_tongue').append("<option value='" + data.mother_tongue[i].id + "' selected>" + data.mother_tongue[i].name + "</option>");
+                } else {
+                    $('#mother-m_tongue').append("<option value='" + data.mother_tongue[i].id + "'>" + data.mother_tongue[i].name + "</option>");
+                }
+
+            }
+
+            $('#signup-profile-for').append(profilefordd);
+            $('#signup-religion').append(religiondd);
+
+            var cCode = data.country ? ($('[data-code="' + data.country.country_code + '"]').text().split('(')[1].split(')')[0]) : '+91';
+            $('#country').text(cCode);
+
+        },
+        error: function (edata) {
+            console.log(edata);
+            console.log("Error occured in dd in register index page");
+            var profilefordd = '<option selected="" value="null">Profile For *</option>';
+            var religiondd = '<option selected="" value="null">Religion *</option>';
+            var mothertonguedd = '<option selected="" value="null">Mother Tongue *</option>';
+        }
+    });
+} //get dd for mothertongue , profile for , religion , country code
+
+//border color changing
+$(".signupbox").click(function () {
+    $(".signupbox input,.signupbox select").removeClass("iserror");
+    $(".select2-selection__rendered").removeClass("iserror");
+    $('#signup-password').removeClass("iserror");
+});
+
+
+
+//register fn starts here
+function regsiterinindexfn() {
+
+    if ($('#login-fname').val().trim() == '') {
+        $("#snackbarerror").text("User Id is required");
+        $('#login-fname').addClass("iserror");
+        showiperrtoast();
+        event.stopPropagation();
+        return;
+    }
+    if ($('#login-password').val().trim() == '') {
+        $("#snackbarerror").text("Password is required");
+        $('#login-password').addClass("iserror");
+        showiperrtoast();
+        event.stopPropagation();
+        return;
+    }
+    }
+
+//register fn starts here
+function regsiterinindexfn() {
+
+    if ($('#signup-fname').val().trim() == '') {
+        $("#snackbarerror").text("First Name is required");
+        $('#signup-fname').addClass("iserror");
+        showiperrtoast();
+        event.stopPropagation();
+        return;
+    }
+    if ($('#signup-lname').val().trim() == '') {
+        $("#snackbarerror").text("Last Name is required");
+        $('#signup-lname').addClass("iserror");
+        showiperrtoast();
+        event.stopPropagation();
+        return;
+    }
+
+    if ($('#signup-profile-for').val() == 'null') {
+        $("#snackbarerror").text("Profile for is required");
+        $('#select2-signup-profile-for-container').addClass("iserror");
+        showiperrtoast();
+        event.stopPropagation();
+        return;
+    }
+
+    if ($('#signup-mobile').val().trim() == '') {
+        $("#snackbarerror").text("Mobile Number is required");
+        $('#signup-mobile').addClass("iserror");
+        showiperrtoast();
+        event.stopPropagation();
+        return;
+    }
+
+    if ($('input[name="gender-radio"]:checked').length == 0) {
+        $("#snackbarerror").text("Gender is required");
+        showiperrtoast();
+        event.stopPropagation();
+        return;
+    }
+
+    // $(".dtp-buttons .dtp-btn-ok").click(function() {
+    //     $('#dob').removeClass("iserror");
+    // });
+
+    if ($('#dob_date').val() == 0) {
+        $("#snackbarerror").text("Birth Date is required");
+        $('#select2-dob_date-container').addClass("iserror");
+        showiperrtoast();
+        event.stopPropagation();
+        return;
+    }
+    if ($('#dob_month').val() == 0) {
+        $("#snackbarerror").text("Birth Month is required");
+        $('#select2-dob_month-container').addClass("iserror");
+        showiperrtoast();
+        event.stopPropagation();
+        return;
+    }
+    if ($('#dob_year').val() == 0) {
+        $("#snackbarerror").text("Birth Year is required");
+        $('#select2-dob_year-container').addClass("iserror");
+        showiperrtoast();
+        event.stopPropagation();
+        return;
+    }
+
+    var currentyear = new Date().getFullYear();
+    var usergivenyear = parseInt($('#dob_year').val());
+
+    if (currentyear - usergivenyear < 18) {
+        $("#snackbarerror").text("Your age should be above 18 to register");
+        showiperrtoast();
+        event.stopPropagation();
+        return;
+    }
+
+    var userdob = $('#dob_year').val() + '-' + $('#dob_month').val() + '-' + $('#dob_date').val();
+
+    if ($('#signup-religion').val() == 'null') {
+        $("#snackbarerror").text("Religion is required");
+        $('#select2-signup-religion-container').addClass("iserror");
+        showiperrtoast();
+        event.stopPropagation();
+        return;
+    }
+    if ($('#signup-email').val().trim() == '') {
+        $("#snackbarerror").text("E-Mail ID is required");
+        $('#signup-email').addClass("iserror");
+        showiperrtoast();
+        event.stopPropagation();
+        return;
+    }
+
+    var email = $('#signup-email').val();
+    var atpos = email.indexOf("@");
+    var dotpos = email.lastIndexOf(".");
+    if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email.length) {
+        $('#signup-email').addClass("iserror");
+        $("#snackbarerror").text("Valid E-Mail ID is required");
+        showiperrtoast();
+        event.stopPropagation();
+        return;
+    }
+
+    if ($('#mother-m_tongue').val() == 'null') {
+        $("#snackbarerror").text("Mother Tongue is required");
+        $('#select2-mother-m_tongue-container').addClass("iserror");
+        showiperrtoast();
+        event.stopPropagation();
+        return;
+    }
+
+    if ($('#signup-password').val().trim() == '') {
+        $("#snackbarerror").text("Password is required");
+        $('#signup-password').addClass("iserror");
+        showiperrtoast();
+        event.stopPropagation();
+        return;
+    }
+    if ($('input[name="termsandcond"]').is(":checked") == false) {
+        $("#snackbarerror").text("Accept Terms and Conditions is required");
+        showiperrtoast();
+        event.stopPropagation();
+        return;
+    }
+    $("#submit-signup-button").attr("disabled", true);
+    $('.loadericon').show();
+
+    if (localStorage.issociallogin == 1) {
+        var postData = JSON.stringify({
+            "first_name": $("#signup-fname").val(),
+            "last_name": $("#signup-lname").val(),
+            "username": $("#signup-mobile").val(),
+            "email": $("#signup-email").val(),
+            "password": $("#signup-password").val(),
+            "is_social_login": 1,
+            "userdetails": {
+                "relationship": $("#signup-profile-for").val(),
+                "country_code": $("#country").text(),
+                "gender": $('[name="gender-radio"]:checked').val(),
+                "dob": userdob,
+                "mother_tongue": $("#mother-m_tongue").val(),
+                "religion": $("#signup-religion").val()
+            }
+        });
+    } else {
+        var postData = JSON.stringify({
+            "first_name": $("#signup-fname").val(),
+            "last_name": $("#signup-lname").val(),
+            "username": $("#signup-mobile").val(),
+            "email": $("#signup-email").val(),
+            "password": $("#signup-password").val(),
+            "is_social_login": 0,
+            "userdetails": {
+                "relationship": $("#signup-profile-for").val(),
+                "country_code": $("#country").text(),
+                "gender": $('[name="gender-radio"]:checked').val(),
+                "dob": userdob,
+                "mother_tongue": $("#mother-m_tongue").val(),
+                "religion": $("#signup-religion").val()
+            },
+            "client": Math.random() * 10000000000000000
+        });
+    }
+
+    $.ajax({
+        url: usersignup_api,
+        type: 'POST',
+        data: postData,
+        headers: {
+            "content-type": 'application/json',
+        },
+        success: function (data) {
+            $("#submit-signup-button").attr("disabled", false);
+            $('.loadericon').hide();
+
+        },
+        error: function (data) {
+            $("#submit-signup-button").attr("disabled", false);
+            $('.loadericon').hide();
+            if (data.status == 406) {
+                $("#snackbarerror").text("Account created. Please Verify OTP");
+                localStorage.useracccred = data.responseJSON;
+                localStorage.useridactivate = data.responseJSON.id;
+                localStorage.wufname = data.responseJSON.first_name;
+                localStorage.wulname = data.responseJSON.last_name;
+                localStorage.wutkn = data.responseJSON.token;
+                localStorage.userregphoneno = data.responseJSON.username;
+                localStorage.usermailid = data.responseJSON.email;
+                localStorage.matrimonyid = data.responseJSON.userprofile.uid;
+                localStorage.wuupldedpropic = data.responseJSON.userprofile.profile_pic;
+
+                localStorage.gender = data.responseJSON.userdetails.gender;
+                localStorage.profilecratedforname = data.responseJSON.userdetails.relationship.name;
+                localStorage.profilecratedforid = data.responseJSON.userdetails.relationship.id;
+
+                window.location.href = "register-phase2.html";
+                showerrtoast();
+                return true;
+            } else {
+
+                for (var key in JSON.parse(data.responseText)) {
+                    $("#snackbarerror").text(JSON.parse(data.responseText)[key] != undefined ? JSON.parse(data.responseText)[key] : JSON.parse(data.responseText)[key].non_field_errors[0]);
+                }
+            }
+            showerrtoast();
+        }
+    }).done(function (dataJson) {
+        localStorage.profilefor = $("#select2-signup-profile-for-container").text();
+        if (localStorage.issociallogin == 0) {
+            $(".regsitersucccontnt").text("Your account has been created and activated successfully!");
+            localStorage.useracccred = JSON.stringify(dataJson);
+            localStorage.useridactivate = dataJson.id;
+            localStorage.wufname = dataJson.first_name;
+            localStorage.wulname = dataJson.last_name;
+            localStorage.wutkn = dataJson.token;
+            localStorage.userregphoneno = dataJson.username;
+            localStorage.usermailid = dataJson.email;
+            localStorage.matrimonyid = dataJson.userprofile.uid;
+            localStorage.wuupldedpropic = dataJson.userprofile.profile_pic;
+
+            localStorage.gender = dataJson.userdetails.gender;
+            localStorage.profilecratedforname = dataJson.userdetails.relationship.name;
+            localStorage.profilecratedforid = dataJson.userdetails.relationship.id;
+
+            if (dataJson.userdetails.quit_status == 0) {
+                window.location.href = "register-phase1.html";
+            } else if (dataJson.userdetails.quit_status == 1) {
+                window.location.href = "register-phase2.html";
+            } else if (dataJson.userdetails.quit_status == 2) {
+                window.location.href = "register-phase3.html";
+            } else if (dataJson.userdetails.quit_status == 3) {
+                window.location.href = "register-phase4.html";
+            } else if (dataJson.userdetails.quit_status == 4) {
+                window.location.href = "register-phase5.html";
+            } else if (dataJson.userdetails.quit_status == 5) {
+                window.location.href = "register-phase6.html";
+            } else {
+                window.location.href = "dashboard.html";
+            }
+        } else {
+            $(".regsitersucccontnt").text("Your account has been created and activated successfully!Please wait...");
+            localStorage.userregmailidinsocpage = $("#signup-email").val();
+            localStorage.userregpwdinsocpage = $("#signup-password").val();
+            setTimeout(function () {
+                dynamic_login();
+            }, 2000);
+        }
+        $("#myModal").modal("toggle");
+    });
+} //register fn ends here
+
+//dynamic_login fn starts here
+function dynamic_login() {
+
+    var uniqueclient = Math.random() * 10000000000000000;
+
+    var postData = JSON.stringify({
+
+        "username": localStorage.userregmailidinsocpage,
+        "password": localStorage.userregpwdinsocpage,
+        "client": uniqueclient
+
+    });
+
+    $.ajax({
+        url: login_api,
+        type: 'post',
+        data: postData,
+        headers: {
+            "content-type": 'application/json',
+        },
+        success: function (data) {
+
+
+        },
+        error: function (data) {
+            window.location.href = "login.html";
+        }
+    }).done(function (dataJson) {
+
+        localStorage.useracccred = JSON.stringify(dataJson);
+        localStorage.useridactivate = dataJson.id;
+        localStorage.wufname = dataJson.first_name;
+        localStorage.wulname = dataJson.last_name;
+        localStorage.wutkn = dataJson.token;
+        localStorage.userregphoneno = dataJson.username;
+        localStorage.usermailid = dataJson.email;
+        localStorage.matrimonyid = dataJson.userprofile.uid;
+        localStorage.wuupldedpropic = dataJson.userprofile.profile_pic;
+
+        localStorage.gender = dataJson.userdetails.gender;
+        localStorage.profilecratedforname = dataJson.userdetails.relationship.name;
+        localStorage.profilecratedforid = dataJson.userdetails.relationship.id;
+        // localStorage.wufbpropic = dataJson.user_info.userprofile.picture;
+
+        if (dataJson.userdetails.quit_status == 0) {
+            window.location.href = "register-phase1.html";
+        } else if (dataJson.userdetails.quit_status == 1) {
+            window.location.href = "register-phase2.html";
+        } else if (dataJson.userdetails.quit_status == 2) {
+            window.location.href = "register-phase3.html";
+        } else if (dataJson.userdetails.quit_status == 3) {
+            window.location.href = "register-phase4.html";
+        } else if (dataJson.userdetails.quit_status == 4) {
+            window.location.href = "register-phase5.html";
+        } else if (dataJson.userdetails.quit_status == 5) {
+            window.location.href = "register-phase6.html";
+        } else {
+            window.location.href = "dashboard.html";
+        }
+
+    }); //done fn ends here
+}
+
+
+//register fn fb starts here
+function _dosignupfb() {
+
+    localStorage.issociallogin = 1;
+
+    $("#loaderspinner").show();
+    var uniqueclient = Math.random() * 10000000000000000;
+    var postData = JSON.stringify({
+        "access_token": localStorage.fbat,
+        "client": uniqueclient
+    });
+
+    $.ajax({
+        url: usersignupfacebook_api,
+        type: 'POST',
+        data: postData,
+        headers: {
+            "content-type": 'application/json',
+        },
+        success: function (data) {
+            $("#loaderspinner").hide();
+        },
+        error: function (data) {
+
+            $("#loaderspinner").hide();
+            $("#snackbarerror").text("Some error occured while connecting with facebook.Try again!");
+            showerrtoast();
+
+        }
+    }).done(function (dataJson) {
+
+        $("#snackbarsuccs").text("You are successfully connected!");
+        showsuccesstoast();
+
+        if (dataJson.user_exists == false) {
+            if (dataJson.results.first_name != null) {
+                $("#signup-fname").val(dataJson.results.first_name);
+            }
+            if (dataJson.results.last_name != null) {
+                $("#signup-lname").val(dataJson.results.last_name);
+            }
+            if (dataJson.results.email != null) {
+                $("#signup-email").val(dataJson.results.email);
+            }
+            if (dataJson.results.gender != null) {
+                $('input:radio[name="gender-radio"]').filter('[value="' + dataJson.results.gender + '"]').attr('checked', true);
+            }
+            if (dataJson.results.dob != null) {
+                $("#dob").val(dataJson.results.dob);
+            }
+            $(".registerauthcntnt").show();
+            $(".usernamefnandgleplus").text(dataJson.results.first_name + " " + dataJson.results.last_name);
+            $(".userreqtype").text("FACEBOOK");
+            $(".regwithauth").slideToggle();
+
+        } else {
+            //if user already exit
+            localStorage.useracccred = JSON.stringify(dataJson);
+            localStorage.useridactivate = dataJson.id;
+            localStorage.wufname = dataJson.first_name;
+            localStorage.wulname = dataJson.last_name;
+            localStorage.wutkn = dataJson.token;
+            localStorage.userregphoneno = dataJson.username;
+            localStorage.usermailid = dataJson.email;
+            localStorage.matrimonyid = dataJson.userprofile.uid;
+            localStorage.wuupldedpropic = dataJson.userprofile.profile_pic;
+
+            localStorage.gender = dataJson.userdetails.gender;
+            localStorage.profilecratedforname = dataJson.userdetails.relationship.name;
+            localStorage.profilecratedforid = dataJson.userdetails.relationship.id;
+            // localStorage.wufbpropic = dataJson.user_info.userprofile.picture;
+            if (dataJson.userdetails.quit_status == 0) {
+                window.location.href = "register-phase1.html";
+            } else if (dataJson.userdetails.quit_status == 1) {
+                window.location.href = "register-phase2.html";
+            } else if (dataJson.userdetails.quit_status == 2) {
+                window.location.href = "register-phase3.html";
+            } else if (dataJson.userdetails.quit_status == 3) {
+                window.location.href = "register-phase4.html";
+            } else if (dataJson.userdetails.quit_status == 4) {
+                window.location.href = "register-phase5.html";
+            } else if (dataJson.userdetails.quit_status == 5) {
+                window.location.href = "register-phase6.html";
+            } else {
+                window.location.href = "dashboard.html";
+            }
+
+        } //else fn ends here
+
+    });
+
+} //register fn fb ends here
+
+//register fn google starts here
+function _dosignupgoogle() {
+
+    localStorage.issociallogin = 1;
+
+    $("#loaderspinner").show();
+
+    var uniqueclient = Math.random() * 10000000000000000;
+    var postData = JSON.stringify({
+        "access_token": localStorage.googleat,
+        "client": uniqueclient
+    });
+
+    $.ajax({
+        url: usersignupgoogle_api,
+        type: 'POST',
+        data: postData,
+        headers: {
+            "content-type": 'application/json',
+        },
+        success: function (data) {
+            $("#loaderspinner").hide();
+        },
+        error: function (data) {
+
+            $("#loaderspinner").hide();
+            $("#snackbarerror").text("Some error occured while connecting with google.Try again!");
+            showerrtoast();
+
+        }
+    }).done(function (dataJson) {
+
+        $("#snackbarsuccs").text("You are successfully connected!");
+        showsuccesstoast();
+
+        if (dataJson.user_exists == false) {
+
+            if (dataJson.email != null) {
+                $("#signup-email").val(dataJson.email);
+
+                $(".registerauthcntnt").show();
+                $(".usernamefnandgleplus").text(dataJson.email.split("@")[0]);
+                $(".userreqtype").text("GOOGLE");
+                $(".regwithauth").slideToggle();
+            }
+
+        } else {
+            //if user already exit
+            localStorage.useracccred = JSON.stringify(dataJson);
+            localStorage.useridactivate = dataJson.id;
+            localStorage.wufname = dataJson.first_name;
+            localStorage.wulname = dataJson.last_name;
+            localStorage.wutkn = dataJson.token;
+            localStorage.userregphoneno = dataJson.username;
+            localStorage.usermailid = dataJson.email;
+            localStorage.matrimonyid = dataJson.userprofile.uid;
+            localStorage.wuupldedpropic = dataJson.userprofile.profile_pic;
+
+            localStorage.gender = dataJson.userdetails.gender;
+            localStorage.profilecratedforname = dataJson.userdetails.relationship.name;
+            localStorage.profilecratedforid = dataJson.userdetails.relationship.id;
+            // localStorage.wufbpropic = dataJson.user_info.userprofile.picture;
+            if (dataJson.userdetails.quit_status == 0) {
+                window.location.href = "register-phase1.html";
+            } else if (dataJson.userdetails.quit_status == 1) {
+                window.location.href = "register-phase2.html";
+            } else if (dataJson.userdetails.quit_status == 2) {
+                window.location.href = "register-phase3.html";
+            } else if (dataJson.userdetails.quit_status == 3) {
+                window.location.href = "register-phase4.html";
+            } else if (dataJson.userdetails.quit_status == 4) {
+                window.location.href = "register-phase5.html";
+            } else if (dataJson.userdetails.quit_status == 5) {
+                window.location.href = "register-phase6.html";
+            } else {
+                window.location.href = "dashboard.html";
+            }
+
+        }
+
+    });
+} //register fn google ends here

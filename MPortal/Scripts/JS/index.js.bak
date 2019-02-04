@@ -1,0 +1,94 @@
+$(function() {
+    //enter click fn signup/login starts here
+    $(".ipclkapplink").keyup(function(event) {
+        if (event.keyCode == 13) {
+            $(".newsltrsendbtn").click();
+        }
+    });
+    $(".sendldr").hide();
+    recentlyjoinedlist();
+
+});
+
+//recently joind list starts here
+function recentlyjoinedlist() {
+    $.ajax({
+        url: recentlyjoined_api,
+        type: 'get',
+        headers: {
+            "content-type": 'application/json'
+        },
+        success: function(data) {
+            $(".recentlyaddedusers").empty();
+            for (i = 0; i < data.length; i++) {
+                var user_img = (data[i].userprofile.profile_pic == null) ? "img/assets/coupleindex.svg" : data[i].userprofile.profile_pic;
+                var gentereq = (data[i].userdetails.gender == "Male") ? "Mr. " : "Ms. ";
+                var userlocatn = (data[i].user_address != null) ? data[i].user_address.city.name : "Not Mentioned";
+
+                $(".recentlyaddedusers").append("<div class='col-lg-2 col-md-2 col-sm-3 col-xs-6'> <div class='card card-2 text-center boxshadowsection'> <div class='card__top'> <a class='pointer watermark_text' onclick='acceptanddenyusers(this," + data[i].id + "," + 0 + ")' style='background: url(" + user_img + ") top center / cover no-repeat;display: block;height: 139px;'>  </a> </div><div class='card__body p10'> <p class='username'>" + gentereq + " " + data[i].first_name + "</p><p class='livesin'>Lives in <span class='spanlivesin'>" + userlocatn + "</span></p></div><div class='card__bottom text-center ptb3'> <div class='card__action tooltipsection'> <a class='pointer social-icon social-icon--dribbble' onclick='acceptanddenyusers(this," + data[i].id + "," + 2 + ")'><i class='fa fa-heart hoverpink accepticon' aria-hidden='true'></i> <div class='shortlisttooltip'>Shortlist</div> </a> </div><div class='card__action tooltipsection'> <a class='pointer social-icon social-icon--dribbble' onclick='acceptanddenyusers(this," + data[i].id + "," + 0 + ")'> <i class='fa fa-star hoverpink accepticon' aria-hidden='true'></i><div class='interesttooltip'>Send Interest</div> </a> </div><div class='card__action tooltipsection'> <a class='pointer social-icon social-icon--dribbble' onclick='acceptanddenyusers(this," + data[i].id + "," + 1 + ")'> <i class='fa fa-thumbs-down hoverblack rejecticon' aria-hidden='true'></i><div class='declinetooltip'>Decline</div> </a> </div></div></div></div>");
+                
+                // $(".recentlyaddedusers").append("<div class='col-lg-2 col-md-2 col-sm-3 col-xs-6'> <div class='card card-2 text-center boxshadowsection'> <div class='card__top'> <a><img src='"+user_img+"' class='watermark_text'>  </a> </div><div class='card__body p10'> <p class='username'>" + gentereq + " " + data[i].first_name + "</p><p class='livesin'>Lives in <span class='spanlivesin'>" + userlocatn + "</span></p></div><div class='card__bottom text-center ptb3'> <div class='card__action'> <a class='pointer' onclick='acceptanddenyusers(this," + data[i].id + "," + 2 + ")'> <i class='fa fa-heart hoverpink accepticon' aria-hidden='true'></i> </a> </div><div class='card__action'> <a class='pointer' onclick='acceptanddenyusers(this," + data[i].id + "," + 0 + ")'> <i class='fa fa-star hoverpink accepticon' aria-hidden='true'></i> </a> </div><div class='card__action'> <a class='pointer' onclick='acceptanddenyusers(this," + data[i].id + "," + 1 + ")'> <i class='fa fa-thumbs-down hoverblack rejecticon' aria-hidden='true'></i> </a> </div></div></div></div>");
+            }
+            // $('.watermark_text').watermark({
+            //     text: 'IAMROHIT.IN',
+            //     textWidth: 100,
+            //     textColor: 'white'
+            // });
+        },
+        error: function(data) {
+            console.log("error occured during recently added users loading");
+        }
+    });
+} //recently joind list starts here
+
+//send request fn
+function acceptanddenyusers(part_elem, itemid, type) {
+    if (localStorage.wutkn == undefined) {
+        $("html, body").animate({ scrollTop: 10 }, "slow");
+        $('.regformdesign').addClass('wobble');
+        $("#snackbarerror").text("Please create an account or login to like this person");
+        showiperrtoast();
+        setTimeout(function() {
+            $('.regformdesign').removeClass('wobble');
+        }, 2000);
+    }
+}
+
+//function for newletter validation starts here
+function newsletter() {
+    if ($('#newsletterphoneno').val() == '') {
+        $("#snackbarerror").text("Phone No is Required");
+        showerrtoast();
+        event.preventDefault();
+        return;
+    }
+    $('.sendldr').show();
+    $(".newsltrsendbtn").attr("disabled", true);
+    var postData = JSON.stringify({
+        "mobile_number": $('#newsletterphoneno').val()
+    });
+    $.ajax({
+        url: sendnewsletter_api,
+        type: 'post',
+        data: postData,
+        headers: {
+            "content-type": 'application/json',
+        },
+        success: function(data) {
+            $("#snackbarsuccs").text("App link has been sent successfully to " + $('#newsletterphoneno').val());
+            showsuccesstoast();
+            $('.sendldr').hide();
+            $(".newsltrsendbtn").attr("disabled", false);
+            $('#newsletterphoneno').val('');
+            $(".applinkmdl").click();
+        },
+        error: function(data) {
+            $('.sendldr').hide();
+            $(".newsltrsendbtn").attr("disabled", false);
+            for (var key in JSON.parse(data.responseText)) {
+                $("#snackbarerror").text(JSON.parse(data.responseText)[key] != undefined ? JSON.parse(data.responseText)[key] : JSON.parse(data.responseText)[key].non_field_errors[0]);
+            }
+            showsuccesstoast();
+        }
+    });
+} //function for newletter validation ends here
